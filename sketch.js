@@ -13,11 +13,12 @@ let select;
 
 function setup() {
   createCanvas(500,500);
-  weightSlider = createSlider(0, 10, 2);
+  
   entry1 = createInput();
   button = createButton("Enter");
   resetR = createButton("Reset");
   select = createSelect();
+  weightSlider = createSlider(0, 10, 2);
   for(i = 1; i <= max; i++){
     select.option(i);
   }
