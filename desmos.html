@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML 5 Boilerplate</title>
+  </head>
+  <body>
+	<script src="https://www.desmos.com/api/v1.8/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
+	<div id="calculator" style = "width: 1000px; height: 1000px;"></div>
+	<script>
+		var elt = document.getElementById('calculator');
+		var calculator = Desmos.GraphingCalculator(elt);
+	</script>
+  </body>
+</html>
