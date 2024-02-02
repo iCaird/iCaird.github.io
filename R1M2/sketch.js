@@ -102,7 +102,7 @@ function enter(){
 }
 
 function reset(){
-  
+  rims = [];
 }
 
 function makeTrap(){
