@@ -140,3 +140,11 @@ function mouseReleased(){
     rim.released();
   }
 }
+
+function touchStarted(){
+  mousePressed();
+  }
+
+function touchEnded(){
+  mouseReleased();
+}
