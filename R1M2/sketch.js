@@ -93,7 +93,10 @@ function keyPressed(){
 function enter(){
   //try {
     label = labelEntry.value().split(" ").map(Number);
-    rim = new Rim(label,n,[255,0,0]);
+    r = random(255);
+    g = random(255);
+    b = random(255);
+    rim = new Rim(label,n,[r,g,b]);
     rims.push(rim);
   //}
   //catch(err){
@@ -141,10 +144,10 @@ function mouseReleased(){
   }
 }
 
-function touchStarted(){
-  mousePressed();
-  }
+// function touchStarted(){
+//   mousePressed();
+//   }
 
-function touchEnded(){
-  mouseReleased();
-}
+// function touchEnded(){
+//   mouseReleased();
+// }

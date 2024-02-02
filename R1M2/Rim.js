@@ -18,14 +18,14 @@ class Rim{
   
   show(){
     noFill();
-    stroke(255,0,0);
+    stroke(this.colour);
     strokeWeight(2);
     beginShape();
     for(point of this.points){
       vertex(point.x,point.y);
       push();
       
-      fill(255,0,0);
+      fill(this.colour);
       circle(point.x,point.y,10);
       pop();
     }
@@ -69,6 +69,7 @@ class Rim{
 
   released(){
     this.dragging = false;
+    this.offset = [];
   }
 }
 
