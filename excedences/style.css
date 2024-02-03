@@ -1,0 +1,16 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+canvas {
+  display: block;
+}
+
+p {
+  padding: 0;
+  margin: 0;
+  font-size : 30px;
+  font-family: "Courier New";
+  display: inline-block;
+  margin-right : 10px;
+}
