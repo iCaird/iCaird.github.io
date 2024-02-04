@@ -1,20 +1,20 @@
-let n;
-let k;
+let n; //length of permutation
+let k; //number of excedences
 let t1; //indices of excedences
 let t2; //indices of non excedences
-let sigma = [];
+let sigma = []; //will be filled with 1 to n
 let count = 0;
-let ps = [];
+let ps = []; //permutations of sigma will be added here as HTML p elements
 let countP;
 function setup() {
   createCanvas(0, 0);
   gen(1, 0);
-  console.log(count);
+
   nInput = createInput("Enter permuation length");
   kInput = createInput("Enter excedences");
   enterButton = createButton("Enter");
   enterButton.mousePressed(enter);
-  createDiv();
+  createDiv(); //seems to be a quick hack to make the permuations display under the buttons and input
 }
 
 function draw() {
@@ -23,35 +23,36 @@ function draw() {
 
 function gen(m, l) {
   let r = m - l;
+
+  // we have found a length n permuation with k excedences
   if (m == n) {
-    //console.log(sigma);
     ps.push(createP(sigma.join("") + " ").style("color", "white"));
     count++;
   } else {
-    if (l <= k && m + 1 - l <= n - k) {
-      t2[r + 1 - 1] = m + 1;
-      gen(m + 1, l);
+    if (l <= k && m + 1 - l <= n - k) { // condition to apply psi or phi at an excedence
+      t2[r + 1 - 1] = m + 1; // "apply psi", does not introduce an excedence
+      gen(m + 1, l); 
       for (let w = 1; w <= l; w++) {
-        sigma = compose(sigma, fromTrans(t1[w - 1], m + 1));
-        gen(m + 1, l);
-        sigma = compose(sigma, fromTrans(t1[w - 1], m + 1));
+        sigma = compose(sigma, fromTrans(t1[w - 1], m + 1)); // apply phi at excedence, does not introduce an excedence
+        gen(m + 1, l); // "apply phi at excedence"
+        sigma = compose(sigma, fromTrans(t1[w - 1], m + 1)); //undo application of phi
       }
     }
-    if (l + 1 <= k && m - l <= n - k) {
+    if (l + 1 <= k && m - l <= n - k) { // condition to apply phi at non excedence
       for (let v = 1; v <= r; v++) {
-        t1[l + 1 - 1] = t2[v - 1];
+        t1[l + 1 - 1] = t2[v - 1]; //preparation for excedence that will be introduced
         let temp = t2[v - 1];
         t2[v - 1] = m + 1;
-        sigma = compose(sigma, fromTrans(temp, m + 1));
+        sigma = compose(sigma, fromTrans(temp, m + 1)); //apply phi at non excedence
         gen(m + 1, l + 1);
-        sigma = compose(sigma, fromTrans(temp, m + 1));
-        t2[v - 1] = temp;
+        sigma = compose(sigma, fromTrans(temp, m + 1)); // undo phi
+        t2[v - 1] = temp; //restore index of non excedences
       }
     }
   }
 }
 
-function fromTrans(a, b) {
+function fromTrans(a, b) { //turn two numbers into a oneline permutation
   let output = [];
   for (let i = 0; i < n; i++) {
     output[i] = i + 1;
@@ -63,7 +64,7 @@ function fromTrans(a, b) {
   return output;
 }
 
-function compose(a, b) {
+function compose(a, b) { //compose two oneline permuations and return result
   let output = [];
   for (let j = 0; j < n; j++) {
     output[j] = a[b[j] - 1];
@@ -72,13 +73,13 @@ function compose(a, b) {
 }
 
 function enter() {
-  for (let p of ps) {
+  for (let p of ps) { //remove any permuations from last run
     p.remove();
   }
-  if(countP){
-      countP.remove();
+  if (countP) {
+    countP.remove();
   }
-
+  //resetting all variables to initial state
   ps = [];
   t1 = [];
   t2 = [1];
@@ -87,12 +88,18 @@ function enter() {
   k = kInput.value();
   count = 0;
   gen(1, 0);
-  createDiv();
-  countP = createP("Count: " + count).style("color","white");
+  createDiv(); //not sure if i need, already have one above
+  countP = createP("Count: " + count).style("color", "white");
 }
 
-function makeSigma(n) {
+function makeSigma(n) { //create array with numbers 1 through n
   for (let i = 0; i < n; i++) {
     sigma[i] = i + 1;
+  }
+}
+
+function keyPressed(){
+  if(keyCode == 13){
+    enter();
   }
 }
