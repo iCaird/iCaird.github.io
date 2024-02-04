@@ -102,7 +102,7 @@ function makeSigma(n) { //create array with numbers 1 through n
 }
 
 function keyPressed(){
-  if(keyCode == 13){
+  if(value == ENTER){
     enter();
   }
 }
