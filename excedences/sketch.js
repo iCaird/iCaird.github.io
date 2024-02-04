@@ -10,11 +10,14 @@ function setup() {
   createCanvas(0, 0);
   gen(1, 0);
 
-  nInput = createInput("Enter permuation length");
+  nInput = createInput("Enter permuation length").id("nInput");
+  
   kInput = createInput("Enter excedences");
   enterButton = createButton("Enter");
   enterButton.mousePressed(enter);
   createDiv(); //seems to be a quick hack to make the permuations display under the buttons and input
+  nInput.mouseClicked(selectN);
+  kInput.mouseClicked(selectK);
 }
 
 function draw() {
@@ -74,6 +77,7 @@ function compose(a, b) { //compose two oneline permuations and return result
 
 function enter() {
   if(nInput.value() == n && kInput.value() == k){
+    console.log("NOTHING CHANGED");
     return;
   }
   for (let p of ps) { //remove any permuations from last run
@@ -91,7 +95,7 @@ function enter() {
   k = kInput.value();
   count = 0;
   gen(1, 0);
-  createDiv(); //not sure if i need, already have one above
+  //createDiv(); //not sure if i need, already have one above
   countP = createP("Count: " + count).style("color", "white");
 }
 
@@ -102,7 +106,15 @@ function makeSigma(n) { //create array with numbers 1 through n
 }
 
 function keyPressed(){
-  if(value == ENTER){
+  if(keyCode == ENTER){
     enter();
   }
+}
+
+function selectN(){
+  nInput.elt.select();
+}
+
+function selectK(){
+  kInput.elt.select();
 }
