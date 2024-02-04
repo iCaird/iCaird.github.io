@@ -4,16 +4,18 @@ let t1; //indices of excedences
 let t2; //indices of non excedences
 let sigma = []; //will be filled with 1 to n
 let count = 0;
+let perms = [];
 let ps = []; //permutations of sigma will be added here as HTML p elements
 let countP;
 function setup() {
   createCanvas(0, 0);
-  gen(1, 0);
 
   nInput = createInput("Enter permuation length").id("nInput");
   
   kInput = createInput("Enter excedences");
   enterButton = createButton("Enter");
+  lexButton = createButton("Lexicographically sort");
+  lexButton.mousePressed(lexSort);
   enterButton.mousePressed(enter);
   createDiv(); //seems to be a quick hack to make the permuations display under the buttons and input
   nInput.mouseClicked(selectN);
@@ -29,7 +31,8 @@ function gen(m, l) {
 
   // we have found a length n permuation with k excedences
   if (m == n) {
-    ps.push(createP(sigma.join("") + " ").style("color", "white"));
+    perms.push(sigma);
+    //ps.push(createP(sigma.join("") + " ").style("color", "white"));
     count++;
   } else {
     if (l <= k && m + 1 - l <= n - k) { // condition to apply psi or phi at an excedence
@@ -80,6 +83,7 @@ function enter() {
     console.log("NOTHING CHANGED");
     return;
   }
+  perms = [];
   for (let p of ps) { //remove any permuations from last run
     p.remove();
   }
@@ -95,8 +99,9 @@ function enter() {
   k = kInput.value();
   count = 0;
   gen(1, 0);
-  //createDiv(); //not sure if i need, already have one above
-  countP = createP("Count: " + count).style("color", "white");
+  displayPs();
+  let d = createDiv(); //FIX: is making a div so that count appears below, but it does 
+  
 }
 
 function makeSigma(n) { //create array with numbers 1 through n
@@ -117,4 +122,21 @@ function selectN(){
 
 function selectK(){
   kInput.elt.select();
+}
+
+
+function lexSort(arr){
+  for(p of ps){
+    p.remove();
+  }
+  countP.remove();
+  perms.sort();
+  displayPs();
+}
+
+function displayPs(){
+  for(perm of perms){
+    ps.push(createP(perm.join("") + " ").style("color", "white"));
+  }
+  countP = createP("Count: " + count).style("color", "white");
 }
