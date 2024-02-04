@@ -73,6 +73,9 @@ function compose(a, b) { //compose two oneline permuations and return result
 }
 
 function enter() {
+  if(nInput.value() == n && kInput.value() == k){
+    return;
+  }
   for (let p of ps) { //remove any permuations from last run
     p.remove();
   }
