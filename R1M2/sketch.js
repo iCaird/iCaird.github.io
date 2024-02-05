@@ -113,7 +113,7 @@ function makeTrap(){
 }
 
 function undo(){
-  
+  rims.pop();
 }
 
 function changeN(){
@@ -121,25 +121,25 @@ function changeN(){
 }
 
 function drawRims(){
-  for(rim of rims){
+  for(let rim of rims){
     rim.show();
   }
 }
 
 function updateRims(){
-  for(rim of rims){
+  for(let rim of rims){
     rim.update();
   }
 }
 
 function mousePressed(){
-  for(rim of rims){
+  for(let rim of rims){
     rim.checkClicked();
   }
 }
 
 function mouseReleased(){
-  for(rim of rims){
+  for(let rim of rims){
     rim.released();
   }
 }
