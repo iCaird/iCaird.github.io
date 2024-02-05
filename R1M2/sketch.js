@@ -12,54 +12,54 @@ function draw() {
   drawGrid();
   drawRims();
   updateRims();
-  
-  
+
+
 }
 
 
-function setupGUI(){
+function setupGUI() {
   labelEntry = createInput();
   labelEntry.elt.focus();
   labelEntry.id("labelEntry");
   labelEntry.elt.focus();
-  
+
   enterButton = createButton("Enter");
   enterButton.mouseClicked(enter);
   enterButton.id("enterButton");
-  
+
   undoButton = createButton("Undo");
-  undoButton.mouseClicked(undo);
-  
-  
+  undoButton.mouseClicked(() => rims.pop());
+
+
   resetButton = createButton("Reset");
-  resetButton.mouseClicked(reset);
-  
+  resetButton.mouseClicked(() => rims = []);
+
   nSelect = createSelect();
-  nSelect.size(40,21);
-  for(i = 1; i <= 20; i++){
+  nSelect.size(40, 21);
+  for (i = 1; i <= 20; i++) {
     nSelect.option(i);
   }
   nSelect.selected(n);
-  nSelect.changed(changeN);
-  
+  nSelect.changed(() => n = int(nSelect.value()));
+
   createP();
-  
+
   trapButton = createButton("Trapeziums");
   trapButton.mouseClicked(makeTrap);
-  
+
   //maybe this should be a slider
-  
-  
+
+
 }
 
-function drawGrid(){
+function drawGrid() {
   push();
   strokeWeight(0);
   fill(180);
-  for(i = 0; i <= n+2; i++){
-    for(j = 0; j <= n+2; j++){
-      circle(10 + i * 2 * width / (n + 3), 10 + j *2 * width / (n + 3),10);
-      circle(10 + (i+0.5)*2*width/(n+3),10 + (j+0.5)*2*width/(n+3),10);
+  for (i = 0; i <= n + 2; i++) {
+    for (j = 0; j <= n + 2; j++) {
+      circle(10 + i * 2 * width / (n + 3), 10 + j * 2 * width / (n + 3), 10);
+      circle(10 + (i + 0.5) * 2 * width / (n + 3), 10 + (j + 0.5) * 2 * width / (n + 3), 10);
     }
   }
   pop();
@@ -67,87 +67,71 @@ function drawGrid(){
 
 
 
-function mousePressed(){
-  
-  
+function mousePressed() {
+
+
 }
 
-function mouseReleased(){
-  
+function mouseReleased() {
+
 }
 
-function keyPressed(){
+function keyPressed() {
   console.log(keyCode);
-  switch(keyCode) {
-      
+  switch (keyCode) {
+
     case 13: //enter
       enter();
       break;
-    
+
     default:
       console.log("DEFAULT");
       break;
   }
 }
 
-function enter(){
-  //try {
-    label = labelEntry.value().split(" ").map(Number);
-    r = random(255);
-    g = random(255);
-    b = random(255);
-    rim = new Rim(label,n,[r,g,b]);
-    rims.push(rim);
-  //}
-  //catch(err){
-     //errorMessage = createP("TRY AGAIN");
-  //}
-}
+function enter() {
 
-function reset(){
-  rims = [];
+  label = labelEntry.value().split(" ").map(Number);
+  r = random(255);
+  g = random(255);
+  b = random(255);
+  rim = new Rim(label, n, [r, g, b]);
+  rims.push(rim);
 }
-
-function makeTrap(){
   
+
+
+function makeTrap() {
+
 }
 
-function undo(){
-  rims.pop();
+function drawRims() {
+  rimAction((rim) => rim.show());
 }
 
-function changeN(){
-  n = int(nSelect.value());
+function updateRims() {
+  rimAction((rim) => rim.update());
 }
 
-function drawRims(){
-  for(let rim of rims){
-    rim.show();
+function mousePressed() {
+  rimAction((rim) => rim.checkClicked());
+}
+
+function mouseReleased() {
+  rimAction((rim) => rim.released());
+}
+
+function rimAction(callback) {
+  for (let rim of rims) {
+    callback(rim);
   }
 }
 
-function updateRims(){
-  for(let rim of rims){
-    rim.update();
+function touchStarted(){
+  mousePressed();
   }
+
+function touchEnded(){
+  mouseReleased();
 }
-
-function mousePressed(){
-  for(let rim of rims){
-    rim.checkClicked();
-  }
-}
-
-function mouseReleased(){
-  for(let rim of rims){
-    rim.released();
-  }
-}
-
-// function touchStarted(){
-//   mousePressed();
-//   }
-
-// function touchEnded(){
-//   mouseReleased();
-// }
