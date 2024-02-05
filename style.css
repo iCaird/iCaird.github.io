@@ -26,9 +26,7 @@
     
 }
 
-.sidenav a:hover {
-    color: #F8F7FF;
-}
+
 
 .sidenav #closebtn {
     position: absolute;
@@ -69,4 +67,8 @@ a:visited {
 
 .sidenav a:link {
     color: #9381FF;
+}
+
+.sidenav a:hover {
+    color: #F8F7FF;
 }
