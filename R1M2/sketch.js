@@ -12,8 +12,6 @@ function draw() {
   drawGrid();
   drawRims();
   updateRims();
-
-
 }
 
 
@@ -84,6 +82,9 @@ function keyPressed() {
       enter();
       break;
 
+    case 67: //c
+      cycleSelectedRims();
+      break;
     default:
       console.log("DEFAULT");
       break;
@@ -100,6 +101,15 @@ function enter() {
   rims.push(rim);
 }
   
+
+function cycleSelectedRims(){
+  for(let rim of rims){
+    if(rim.clicked) {
+      console.log("CYCLING: " + rim);
+      rim.cycle();
+    }
+  }
+}
 
 
 function makeTrap() {
