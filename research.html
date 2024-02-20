@@ -40,11 +40,21 @@ https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js
             repeat this (possibly infinite) process starting with the initial seed. You then collect all the elements
             from all seeds into a set and generate an algebra from them.
         </p>
-    </div>
-    <div style="border-width: 2px; border-color: black; border-radius: 25px; border-style: solid">
-    <h2 style="text-align: center; line-height: 50px;">What is a Grassmannian?</h2>
-    <div>
 
+        <p style="padding-left: 20px; padding-right: 20px;">
+            These rules for mutation can be encoded in a quiver associated to the initial seed. This quiver is also
+            mutated between each seed.
+        </p>
+    </div>
+    <div style="margin-top: 10px; border-width: 2px; border-color: black; border-radius: 25px; border-style: solid">
+    <h2 style="text-align: center; line-height: 50px;">What is a Grassmannian?</h2>
+        <p style="padding-left: 20px; padding-right: 20px;">
+            Given $k,n \in \mathbb{N}$, with $k \leq n$, the Grassmannian $Gr(k,n)$ is defined as the set of k-dimensional subspaces
+            in $\mathbb{C}^n$, i.e. $$Gr(k,n) = \{V \leq \mathbb{C}^n \mid \mathrm{dim}\,V = k\}$$
+            How can we describe an element of a Grassmannian? Let's consider $Gr(2,4)$. We can take a max rank $2 \times 4$ matrix
+            $$A = \begin{pmatrix} a & b & c & d \\ e & f & g & h \end{pmatrix}$$ and consider its row span. Since A has rank 2, its row span
+            its a 2-dimensional subspace of $\mathbb{C}^4$, i.e. it determines an element $V \in Gr(2,4)$. 
+        </p>
     </div>
 </body>
 
