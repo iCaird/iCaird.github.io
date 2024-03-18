@@ -1,6 +1,6 @@
-maxGrid = 12;
-n = 5;
-rims = [];
+let maxGrid = 12;
+let n = 5;
+let rims = [];
 
 function setup() {
   createCanvas(400, 600);
@@ -54,8 +54,8 @@ function drawGrid() {
   push();
   strokeWeight(0);
   fill(180);
-  for (i = 0; i <= n + 2; i++) {
-    for (j = 0; j <= n + 2; j++) {
+  for (let i = 0; i <= n + 2; i++) {
+    for (let j = 0; j <= n + 2; j++) {
       circle(10 + i * 2 * width / (n + 3), 10 + j * 2 * width / (n + 3), 10);
       circle(10 + (i + 0.5) * 2 * width / (n + 3), 10 + (j + 0.5) * 2 * width / (n + 3), 10);
     }
@@ -93,11 +93,11 @@ function keyPressed() {
 
 function enter() {
 
-  label = labelEntry.value().split(" ").map(Number);
-  r = random(255);
-  g = random(255);
-  b = random(255);
-  rim = new Rim(label, n, [r, g, b]);
+  let label = labelEntry.value().split(" ").map(Number);
+  let r = random(255);
+  let g = random(255);
+  let b = random(255);
+  let rim = new Rim(label, n, [r, g, b]);
   rims.push(rim);
 }
   
@@ -116,6 +116,12 @@ function makeTrap() {
 
 }
 
+function rimAction(callback) {
+  for (let rim of rims) {
+    callback(rim);
+  }
+}
+
 function drawRims() {
   rimAction((rim) => rim.show());
 }
@@ -132,11 +138,7 @@ function mouseReleased() {
   rimAction((rim) => rim.released());
 }
 
-function rimAction(callback) {
-  for (let rim of rims) {
-    callback(rim);
-  }
-}
+
 
 function touchStarted(){
   mousePressed();
@@ -144,4 +146,25 @@ function touchStarted(){
 
 function touchEnded(){
   mouseReleased();
+}
+
+
+function hom(m,n){
+  let mLabel = m.label;
+  let nLabel = n.label;
+
+  let mys = [];
+  let count = 0;
+  mys[0] = 0;
+  for(let i=1; i <= n; i++){
+    if( mLabel.includes[i]){
+      console.log("INCLUDES!");
+      count -= 1;
+      mys.push(count);
+    }else{
+      count += 1;
+      mys.push(count);
+    }
+  }
+  console.log(mys);
 }
