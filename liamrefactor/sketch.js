@@ -55,13 +55,14 @@ function draw() {
   if(gameOver){
     music.stop();
     winSound.play();
-    localStorage.setItem("highScore", finalTime);
+    
     text(`Your time: ${finalTime}`, width/2,height/2);
   } else{
     textSize(32);
     text(floor(millis()/1000),30,50);
-    if (localStorage.getItem("highScore")) {
+    if (localStorage.getItem("highScore") || finalTime < localStorage.getItem("highScore")) {
       console.log(localStorage.getItem("highScore"));
+      localStorage.setItem("highScore", finalTime);
       text("Best time: " + localStorage.getItem("highScore"),width-150,50);
   }
   }
