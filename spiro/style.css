@@ -6,3 +6,7 @@ html, body {
 canvas {
   display: block;
 }
+
+p { 
+  padding: 2em
+}
