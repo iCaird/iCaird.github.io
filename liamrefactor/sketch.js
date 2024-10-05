@@ -51,21 +51,21 @@ function draw() {
   background(220);
 
   checkClicked();
-
+  textSize(32);
   if(gameOver){
     music.stop();
     winSound.play();
     
     text(`Your time: ${finalTime}`, width/2,height/2);
-  } else{
-    textSize(32);
-    text(floor(millis()/1000),30,50);
-    if (localStorage.getItem("highScore") || finalTime < localStorage.getItem("highScore")) {
+    if (finalTime < localStorage.getItem("highScore") || !localStorage.getItem("highScore")) {
       console.log(localStorage.getItem("highScore"));
       localStorage.setItem("highScore", finalTime);
-      text("Best time: " + localStorage.getItem("highScore"),width-150,50);
-  }
-  }
+    } 
+  
+  }else{
+    text(floor(millis()/1000),30,50);
+    }
+  text("Best time: " + localStorage.getItem("highScore"),width-150,50);
 
   if (liams.length == 0 && !gameOver) {
     level++;
