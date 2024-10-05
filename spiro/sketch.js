@@ -106,6 +106,8 @@ function keyPressed(){
 
 function drawSliderValues(){
   for(let slider of sliders){
+    textFont("Courier New");
+    textStyle(BOLD);
     text(`${labels[sliders.indexOf(slider)]} = ${slider.value()}`,sliderDiv.position().x + slider.position().x + sliderDiv.width ,sliderDiv.position().y + slider.position().y + RSlider.height/2);
   }
 }
