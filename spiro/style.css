@@ -8,5 +8,6 @@ canvas {
 }
 
 p { 
-  padding: 0.5em
+  padding: 0.5em;
+  font-family: "Courier New", Courier, monospace
 }
