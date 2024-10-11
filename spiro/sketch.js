@@ -19,7 +19,8 @@ let showLines = true;
 let drawPoints = true;
 
 function setup() {
-  createCanvas(800, 800);
+  let canvas = createCanvas(800, 800);
+  canvas.parent("sketchDiv");
   background(220);
   pointsLayer = createGraphics(800,800);
   sliderDiv = createDiv();
@@ -105,6 +106,8 @@ function keyPressed(){
 
 function drawSliderValues(){
   for(let slider of sliders){
+    textFont("Courier New");
+    textStyle(BOLD);
     text(`${labels[sliders.indexOf(slider)]} = ${slider.value()}`,sliderDiv.position().x + slider.position().x + sliderDiv.width ,sliderDiv.position().y + slider.position().y + RSlider.height/2);
   }
 }
